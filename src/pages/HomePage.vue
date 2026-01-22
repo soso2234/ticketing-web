@@ -48,6 +48,14 @@ import { useRouter } from 'vue-router'
 import poster1 from '../assets/posters/poster1.jpg'
 import poster2 from '../assets/posters/poster2.jpg'
 import poster3 from '../assets/posters/poster3.jpg'
+import poster4 from '../assets/posters/poster4.jpg'
+import poster4 from '../assets/posters/poster5.jpg'
+import poster4 from '../assets/posters/poster6.jpg'
+import poster4 from '../assets/posters/poster7.jpg'
+import poster4 from '../assets/posters/poster8.jpg'
+import poster4 from '../assets/posters/poster9.jpg'
+
+
 
 const router = useRouter()
 const selected = ref(null)
@@ -60,9 +68,16 @@ const loading = ref(false)
 const error = ref('')
 
 const posters = ref([
-  { id: 1, title: '<센과 치히로의 행방불명>오리지널투어(SPIRITED AWAY)', sub: '예술의전당 오페라 극장 2026.02.23', image: poster1 },
-  { id: 2, title: '뮤지컬<비틀쥬스>', sub: 'LG 아트센터 서울 LG SIGNATURE 홀 2026.03.01', image: poster2 },
-  { id: 3, title: '뮤지컬<물랑루즈!>(Mulin Rouge! The Musical)', sub: '블루스퀘어 신한카드홀 2026.03.05', image: poster3 },
+  { id: 1, title: '<센과 치히로의 행방불명>오리지널투어(SPIRITED AWAY)', sub: '예술의전당 오페라 극장 2026.01.23', image: poster1 },
+  { id: 2, title: '뮤지컬<비틀쥬스>', sub: 'LG 아트센터 서울 LG SIGNATURE 홀 2026.02.01', image: poster2 },
+  { id: 3, title: '뮤지컬<물랑루즈!>(Mulin Rouge! The Musical)', sub: '블루스퀘어 신한카드홀 2026.02.15', image: poster3 },
+  { id: 4, title: '뮤지컬<킹키부츠>', sub: '샤롯데씨어터 2026.02.22', image: poster4 },
+  { id: 5, title: '뮤지컬<한복 입은 남자>', sub: '충무아트센터 대극장 2026.03.01', image: poster5 },
+  { id: 6, title: '뮤지컬<데스노트>', sub: '디큐브 링크아트센터 2026.03.04', image: poster6 },
+  { id: 7, title: '뮤지컬<빨래>', sub: 'NOL 유니플렉스 2관 2026.03.15', image: poster7 },
+  { id: 8, title: '뮤지컬<홍련>', sub: '충무아트센터 중극장 블랙 2026.03.17', image: poster8 },
+  { id: 9, title: '뮤지컬<어서 오세요,휴남동 서점입니다>', sub: '루미나아트홀 2026.03.31', image: poster9 },
+
 ])
 
 function goLogin() {
