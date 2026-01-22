@@ -49,11 +49,11 @@ import poster1 from '../assets/posters/poster1.jpg'
 import poster2 from '../assets/posters/poster2.jpg'
 import poster3 from '../assets/posters/poster3.jpg'
 import poster4 from '../assets/posters/poster4.jpg'
-import poster4 from '../assets/posters/poster5.jpg'
-import poster4 from '../assets/posters/poster6.jpg'
-import poster4 from '../assets/posters/poster7.jpg'
-import poster4 from '../assets/posters/poster8.jpg'
-import poster4 from '../assets/posters/poster9.jpg'
+import poster5 from '../assets/posters/poster5.jpg'
+import poster6 from '../assets/posters/poster6.jpg'
+import poster7 from '../assets/posters/poster7.jpg'
+import poster8 from '../assets/posters/poster8.jpg'
+import poster9 from '../assets/posters/poster9.jpg'
 
 
 
