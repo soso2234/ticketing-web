@@ -10,11 +10,19 @@
   height: 80px;
   background: #ffffff;
   border-bottom: 2px solid #fbcfe8;
-  display: flex;
+
+  /* ✅ 3칸 레이아웃: 좌(빈공간) / 중앙(타이틀) / 우(버튼들) */
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
   align-items: center;
-  justify-content: space-between;
-  position: relative;
+
+  /* 기존 유지 */
   padding: 0 24px;
+}
+
+/* (HomePage.vue에서 brandLeft를 넣었다는 전제) */
+.brandLeft {
+  /* 빈 공간(중앙정렬용) */
 }
 
 .brand {
@@ -22,13 +30,26 @@
   font-weight: 900;
   letter-spacing: -1px;
   color: #ec4899;
+
+  /* ✅ 타이틀을 진짜 가운데로 */
+  justify-self: center;
+}
+
+.actions {
+  /* ✅ 버튼은 우측 끝 + 세로 중앙 정렬 */
+  justify-self: end;
+  display: flex;
+  gap: 12px;
+  align-items: center;
 }
 
 .login {
+  /* ✅ absolute/translateY 계열 제거 (위로 떠 보이는 원인) */
   position: static;
-  right: 24px;
-  top: 50%;
-  transform: translateY(-50%);
+  right: auto;
+  top: auto;
+  transform: none;
+
   border: none;
   background: linear-gradient(135deg, #fb7185, #60a5fa);
   color: #fff;
@@ -37,12 +58,6 @@
   cursor: pointer;
   font-weight: 800;
   box-shadow: 0 6px 18px rgba(236, 72, 153, 0.35);
-}
-
-.actions {
-  display: flex;
-  gap: 12px;
-  align-items: center;
 }
 
 .main {
