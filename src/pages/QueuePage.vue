@@ -48,7 +48,7 @@ const router = useRouter()
 const route = useRoute()
 
 // 백엔드가 다른 프로젝트/서버라 full URL 사용(클라우드 올릴시 domain 주소로 변경)
-const API_BASE = 'http://localhost:3000'
+const API_BASE = import.meta.env.VITE_API_BASE_URL
 
 // 화면 표시값들
 const myNumber = ref(null)          // 서버 position

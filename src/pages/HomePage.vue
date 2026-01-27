@@ -121,8 +121,7 @@ onBeforeUnmount(() => {
 })
 
 // 백엔드가 다른 프로젝트/서버라면 full URL 필수(클라우드 올릴시 domain 주소로 변경)
-const API_BASE = 'http://localhost:3000'
-
+const API_BASE = import.meta.env.VITE_API_BASE_URL
 // (선택) 버튼 중복 클릭 방지/에러 표시용
 const loading = ref(false)
 const error = ref('')

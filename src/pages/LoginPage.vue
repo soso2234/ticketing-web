@@ -46,7 +46,7 @@ const goEmailLogin = () => router.push('/email-login')
 
 
 // 백엔드가 다른 프로젝트/서버라면 full URL 필수 (배포 시 도메인으로 변경)
-const API_BASE = 'http://localhost:3000'
+const API_BASE = import.meta.env.VITE_API_BASE_URL
 const BACKEND_ORIGIN = API_BASE
 
 function openKakaoLogin() {
