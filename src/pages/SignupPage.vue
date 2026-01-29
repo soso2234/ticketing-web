@@ -67,8 +67,8 @@
     }
 
     try {
-      // `${API_BASE}/auth/signup`
-      const res = await fetch('http://localhost:3000/auth/signup', {
+      //const res = await fetch('http://localhost:3000/auth/signup', {
+      const res = await fetch(`${API_BASE}/auth/signup`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

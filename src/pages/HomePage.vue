@@ -81,11 +81,14 @@ const isLoggedIn = ref(false)
 function refreshAuthState() {
   try {
     const raw = localStorage.getItem('auth_user')
-    isLoggedIn.value = !!raw
+    if (!raw) return (isLoggedIn.value = false)
+    const parsed = JSON.parse(raw)
+    isLoggedIn.value = !!parsed?.id // id가 있어야 로그인으로 인정
   } catch {
     isLoggedIn.value = false
   }
 }
+
 
 function goLogin() {
   router.push('/login')
@@ -101,10 +104,20 @@ function goMyReservations() {
 }
 
 function logout() {
+  // 로그인 정보 제거
   localStorage.removeItem('auth_user')
+
+  // (선택) 흐름 데이터도 정리 (대기열/예매 관련)
+  localStorage.removeItem('queueToken')
+  localStorage.removeItem('eventId')
+  localStorage.removeItem('userId') // 예전에 랜덤으로 쓰던 값이 남아있을 수 있음
+
   refreshAuthState()
-  // 홈에 그대로 두고 UI만 변경 (원하면 router.push('/')도 가능)
+
+  alert('로그아웃 되었습니다.')
+  // router.push('/login') // 로그인 창으로 이동
 }
+
 
 // storage 이벤트: 다른 탭/창에서 localStorage 변경 시 반영
 function onStorageChange(e) {
@@ -152,8 +165,30 @@ async function goQueue(p) {
   error.value = ''
 
   try {
-    const userId = 'user-' + Math.floor(Math.random() * 100000)
-    const eventId = String(p.id) // 포스터 id를 공연번호(eventId)로 사용
+    const eventId = String(p.id)
+
+    // ✅ 발표/부하테스트용: 로그인 없어도 큐 진입 가능
+    // 익명 사용자 식별자(대기열용) - 세션마다 랜덤이면 충분
+    const userId = `anon-${Math.floor(Math.random() * 100000000)}`
+
+    // ✅ BookingPage에서 예매 INSERT할 때 쓸 값들(데모용)
+    const eventAtMap = {
+      1: '2026-02-23T19:00:00+09:00',
+      2: '2026-02-01T19:00:00+09:00',
+      3: '2026-02-15T19:00:00+09:00',
+      4: '2026-02-22T19:00:00+09:00',
+      5: '2026-03-01T19:00:00+09:00',
+      6: '2026-03-04T19:00:00+09:00',
+      7: '2026-03-15T19:00:00+09:00',
+      8: '2026-03-17T19:00:00+09:00',
+      9: '2026-03-31T19:00:00+09:00',
+    }
+    const eventAt = eventAtMap[p.id]
+    if (!eventAt) throw new Error('eventAt missing')
+
+    localStorage.setItem('eventId', eventId)
+    localStorage.setItem('eventAt', eventAt)
+    localStorage.setItem('userId', userId) // 큐/클라 편의용(익명)
 
     const resp = await fetch(`${API_BASE}/queue/enter`, {
       method: 'POST',
@@ -168,20 +203,17 @@ async function goQueue(p) {
 
     const data = await resp.json()
 
-    // Queue 페이지에서 쓰도록 저장
     localStorage.setItem('queueToken', data.queueToken)
-    localStorage.setItem('eventId', eventId)
-    localStorage.setItem('userId', userId)
 
-    // Queue 화면으로 이동
     router.push({ path: '/queue', query: { eventId, token: data.queueToken } })
   } catch (e) {
     console.error(e)
-    error.value = '대기열 진입에 실패했습니다. 백엔드(3000) 실행/ CORS 설정을 확인하세요.'
+    error.value = '대기열 진입에 실패했습니다.'
   } finally {
     loading.value = false
   }
 }
+
 </script>
 
 <style scoped src="../assets/styles/HomePage.css"></style>
